@@ -1,7 +1,7 @@
 # BEACON
 
 <div align="center">
-    <img src="assets/logo.svg" alt="BEACON Logo" width="200" height="200">
+    <img src="assets/logo.svg" alt="BEACON Logo" width="400">
 </div>
 
 <h1 align="center">Biomedical Evidence Analysis and Classification ONtology</h1>
