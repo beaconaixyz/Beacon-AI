@@ -1,0 +1,166 @@
+# Data Generation Configuration
+data:
+  n_samples: 500
+  image_size: 64
+  n_genes: 1000
+  noise_level: 0.1
+  survival_mean: 24  # months
+
+# Data Processing Configuration
+processing:
+  clinical:
+    scaling_method: standard
+    handle_missing: true
+    missing_strategy: mean
+  
+  imaging:
+    normalize: true
+    denoise: true
+    enhance_contrast: true
+    denoise_method: gaussian
+    contrast_method: clahe
+  
+  genomic:
+    scaling_method: standard
+    handle_missing: true
+    remove_outliers: true
+    outlier_threshold: 3.0
+
+# Model Configuration
+models:
+  cancer_classifier:
+    hidden_dim: 64
+    dropout_rate: 0.3
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+  
+  image_classifier:
+    in_channels: 1
+    base_filters: 32
+    n_blocks: 3
+    dropout_rate: 0.3
+    learning_rate: 0.001
+    batch_size: 16
+    epochs: 50
+  
+  genomic_model:
+    hidden_dims: [512, 256, 128]
+    dropout_rate: 0.3
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+    l1_lambda: 0.01
+  
+  survival_model:
+    hidden_dims: [64, 32]
+    dropout_rate: 0.2
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+
+# Training Configuration
+training:
+  device: cuda  # or cpu
+  seed: 42
+  validation_split: 0.2
+  early_stopping_patience: 10
+
+# Cross Validation Configuration
+cross_validation:
+  enabled: true
+  n_splits: 5
+  shuffle: true
+  stratified: true
+  random_state: 42
+  save_fold_models: true
+
+# Ensemble Configuration
+ensemble:
+  enabled: true
+  method: voting  # voting or averaging
+  weights: null  # Optional weights for weighted averaging
+  save_ensemble_model: true
+  threshold: 0.5  # Confidence threshold for ensemble predictions
+
+# Model Interpretability Configuration
+interpretability:
+  enabled: true
+  methods:
+    - integrated_gradients
+    - deep_lift
+    - shap
+    - gradcam_plus_plus
+    - smooth_grad
+  
+  integrated_gradients:
+    n_steps: 50
+    internal_batch_size: 32
+  
+  deep_lift:
+    baseline: zero  # zero or random
+  
+  gradcam_plus_plus:
+    use_relu: true
+    use_higher_order_derivatives: true
+  
+  smooth_grad:
+    n_samples: 50
+    noise_level: 0.1
+    use_squared_gradients: false
+  
+  shap:
+    n_background_samples: 100
+  
+  counterfactuals:
+    n_samples: 10
+    max_iterations: 100
+    learning_rate: 0.01
+    distance_weight: 0.1
+  
+  stability_analysis:
+    enabled: true
+    n_perturbations: 10
+    noise_level: 0.1
+    methods:
+      - gradient
+      - integrated_gradients
+      - deep_lift
+      - gradcam_plus_plus
+      - smooth_grad
+  
+  visualization:
+    max_display_samples: 5
+    save_plots: true
+    plot_format: png
+    dpi: 300
+    cmap: jet
+    alpha: 0.5
+    saliency_threshold: 0.2
+    top_k_features: 5
+    figure_size:
+      width: 12
+      height: 8
+    interactive:
+      enabled: true
+      height: 800
+      width: 1200
+    3d_plot:
+      enabled: true
+      elevation: 30
+      azimuth: 45
+      antialiased: true
+
+# Output Configuration
+output:
+  save_models: true
+  model_dir: models
+  results_dir: results
+  plot_metrics: true
+  save_predictions: true
+  metrics_file: metrics.json
+  plots:
+    format: png
+    dpi: 300
+    show_plots: true
+    save_plots: true 
