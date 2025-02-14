@@ -4,7 +4,11 @@
     <img src="assets/logo.svg" alt="BEACON Logo" width="400">
 </div>
 
-<h1 align="center">Biomedical Evidence Analysis and Classification ONtology</h1>
+<h1 align="center">Transforming Cancer Treatment<br>Through Advanced AI Integration</h1>
+
+<p align="center">
+BEACON combines cutting-edge artificial intelligence with comprehensive medical expertise to deliver personalized, data-driven cancer treatment solutions for healthcare providers worldwide.
+</p>
 
 <p align="center">
     <a href="https://github.com/beaconaixyz/Beacon-AI/actions">
